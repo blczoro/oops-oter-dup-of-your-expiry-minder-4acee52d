@@ -9,30 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
-import { Route as AuthenticatedRemindersRouteImport } from './routes/_authenticated/reminders'
-import { Route as AuthenticatedMyItemsRouteImport } from './routes/_authenticated/my-items'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedAddItemRouteImport } from './routes/_authenticated/add-item'
-import { Route as AuthenticatedInviteTokenRouteImport } from './routes/_authenticated/invite.$token'
-import { Route as AuthenticatedItemsIdEditRouteImport } from './routes/_authenticated/items.$id.edit'
 
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRoute = AuthenticatedRouteImport.update({
-  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -40,150 +22,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedRemindersRoute = AuthenticatedRemindersRouteImport.update({
-  id: '/reminders',
-  path: '/reminders',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedMyItemsRoute = AuthenticatedMyItemsRouteImport.update({
-  id: '/my-items',
-  path: '/my-items',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedAddItemRoute = AuthenticatedAddItemRouteImport.update({
-  id: '/add-item',
-  path: '/add-item',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedInviteTokenRoute =
-  AuthenticatedInviteTokenRouteImport.update({
-    id: '/invite/$token',
-    path: '/invite/$token',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-const AuthenticatedItemsIdEditRoute =
-  AuthenticatedItemsIdEditRouteImport.update({
-    id: '/items/$id/edit',
-    path: '/items/$id/edit',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
-  '/add-item': typeof AuthenticatedAddItemRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
-  '/my-items': typeof AuthenticatedMyItemsRoute
-  '/reminders': typeof AuthenticatedRemindersRoute
-  '/settings': typeof AuthenticatedSettingsRoute
-  '/invite/$token': typeof AuthenticatedInviteTokenRoute
-  '/items/$id/edit': typeof AuthenticatedItemsIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
-  '/add-item': typeof AuthenticatedAddItemRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
-  '/my-items': typeof AuthenticatedMyItemsRoute
-  '/reminders': typeof AuthenticatedRemindersRoute
-  '/settings': typeof AuthenticatedSettingsRoute
-  '/invite/$token': typeof AuthenticatedInviteTokenRoute
-  '/items/$id/edit': typeof AuthenticatedItemsIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
-  '/_authenticated/add-item': typeof AuthenticatedAddItemRoute
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
-  '/_authenticated/my-items': typeof AuthenticatedMyItemsRoute
-  '/_authenticated/reminders': typeof AuthenticatedRemindersRoute
-  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
-  '/_authenticated/invite/$token': typeof AuthenticatedInviteTokenRoute
-  '/_authenticated/items/$id/edit': typeof AuthenticatedItemsIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/login'
-    | '/signup'
-    | '/add-item'
-    | '/dashboard'
-    | '/my-items'
-    | '/reminders'
-    | '/settings'
-    | '/invite/$token'
-    | '/items/$id/edit'
+  fullPaths: '/' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/login'
-    | '/signup'
-    | '/add-item'
-    | '/dashboard'
-    | '/my-items'
-    | '/reminders'
-    | '/settings'
-    | '/invite/$token'
-    | '/items/$id/edit'
-  id:
-    | '__root__'
-    | '/'
-    | '/_authenticated'
-    | '/login'
-    | '/signup'
-    | '/_authenticated/add-item'
-    | '/_authenticated/dashboard'
-    | '/_authenticated/my-items'
-    | '/_authenticated/reminders'
-    | '/_authenticated/settings'
-    | '/_authenticated/invite/$token'
-    | '/_authenticated/items/$id/edit'
+  to: '/' | '/login'
+  id: '__root__' | '/' | '/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   LoginRoute: typeof LoginRoute
-  SignupRoute: typeof SignupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -193,98 +65,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/reminders': {
-      id: '/_authenticated/reminders'
-      path: '/reminders'
-      fullPath: '/reminders'
-      preLoaderRoute: typeof AuthenticatedRemindersRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/my-items': {
-      id: '/_authenticated/my-items'
-      path: '/my-items'
-      fullPath: '/my-items'
-      preLoaderRoute: typeof AuthenticatedMyItemsRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/add-item': {
-      id: '/_authenticated/add-item'
-      path: '/add-item'
-      fullPath: '/add-item'
-      preLoaderRoute: typeof AuthenticatedAddItemRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/invite/$token': {
-      id: '/_authenticated/invite/$token'
-      path: '/invite/$token'
-      fullPath: '/invite/$token'
-      preLoaderRoute: typeof AuthenticatedInviteTokenRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/items/$id/edit': {
-      id: '/_authenticated/items/$id/edit'
-      path: '/items/$id/edit'
-      fullPath: '/items/$id/edit'
-      preLoaderRoute: typeof AuthenticatedItemsIdEditRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
   }
 }
 
-interface AuthenticatedRouteChildren {
-  AuthenticatedAddItemRoute: typeof AuthenticatedAddItemRoute
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-  AuthenticatedMyItemsRoute: typeof AuthenticatedMyItemsRoute
-  AuthenticatedRemindersRoute: typeof AuthenticatedRemindersRoute
-  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
-  AuthenticatedInviteTokenRoute: typeof AuthenticatedInviteTokenRoute
-  AuthenticatedItemsIdEditRoute: typeof AuthenticatedItemsIdEditRoute
-}
-
-const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
-  AuthenticatedAddItemRoute: AuthenticatedAddItemRoute,
-  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-  AuthenticatedMyItemsRoute: AuthenticatedMyItemsRoute,
-  AuthenticatedRemindersRoute: AuthenticatedRemindersRoute,
-  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
-  AuthenticatedInviteTokenRoute: AuthenticatedInviteTokenRoute,
-  AuthenticatedItemsIdEditRoute: AuthenticatedItemsIdEditRoute,
-}
-
-const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
-  AuthenticatedRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   LoginRoute: LoginRoute,
-  SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
